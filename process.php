@@ -1,4 +1,6 @@
 <?php
+require_once "./results.php";
+
 function recursive_addition($number){
     $len = strlen($number);
     if($len == 1){
@@ -16,6 +18,47 @@ function recursive_addition($number){
             $len = strlen(strval($newSum));
         }
         return $newSum;
+    }
+}
+
+function getFullMonth($month){
+    switch ($month) {
+        case '1':
+            return 'Enero';
+            break;
+        case '2':
+            return 'Febrero';
+            break;
+        case '3':
+            return 'Marzo';
+            break;
+        case '4':
+            return 'Abril';
+            break;
+        case '5':
+            return 'Mayo';
+            break;
+        case '6':
+            return 'Junio';
+            break;
+        case '7':
+            return 'Julio';
+            break;
+        case '8':
+            return 'Agosto';
+            break;
+        case '9':
+            return 'Septiembre';
+            break;
+        case '10':
+            return 'Octubre';
+            break;
+        case '11':
+            return 'Noviembre';
+            break;
+        case '12':
+            return 'Diciembre';
+            break;
     }
 }
 
@@ -114,66 +157,87 @@ for($i = 0; $i<7; $i++){
             font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
             padding:3%;
         }
+        .important{
+            color: red;
+        }
+        .ltl{
+            font-size: small;
+            text-align: justify;
+        }
     </style>    
 </head>
 <body>
     <div class="container">
-        <h1>Resultados</h1>
-        <h4>La información ingresada por el usuario es la siguiente:</h4><br>
-        <p>
-            <b>Nombre: </b> <?php echo $name; ?>
-        </p>
-        <p>
-            <b>Fecha de nacimiento:</b><br>
-            <b>Día: </b> <?php echo $day ?><br>
-            <b>Mes: </b> <?php echo $month ?><br>
-            <b>Año: </b> <?php echo $year ?><br>
-        </p>
-
         <br>
-        <h4>Análisis previo del nombre:</h4><br>
         <p>
-            <b>Número de palabras: </b> <?php echo $len ?>
-        </p>
+            Sabias que dentro del nombre de las personas, según el sentido de las letras, se encierra el Karma?. Esta afirmación del Esoterista Samael Aun Weor en su libro Curso Zodiacal nos invita a explorar el sentido de nuestro nombre desde sus origenes y asi encontrarle sus significados más trascendentes.
+        </p>            
         <p>
-            <b>Longitud de palabras: </b> <br>
-            <?php
-            for ($i=0; $i < $len; $i++) { 
-                echo $names[$i] . '(' . strlen($names[$i]) . ') <br>';
-            }
-            ?>
+            Existen formulas Kabalisticas muy antiguas que nos permiten encontrar el razgo caracteristico de cada individuo. Para poder entenderlas se necesitarian volumenes y horas de estudios. Es por esto que basados en las formulas del Esoterista Samael Aun Weor e Iglesias Janeiro te brindamos los resultados exactos de sus formulas de manera sencilla y a tu alcance.
+        </p>            
+        <p>
+            Si quieres profundizar en la ciencia de la KÁBALA te invitamos a un curso gratuito <a href="https://www.gnosisinternacional.com/curso-de-kabala-online" target="_blank">aqui</a> o bien estudiar los libros fuente como Tarot y Kabala, La Arcana de los numeros y La Cabala de prediccion.<br>
         </p>
         <br>
-
-        <h4>Resultados:</h4><br>
-        <p>
-            <b>Tónica fundamental:</b> <?php echo $tonica; ?>
-            <br>
-            <b>Urgencia interior:</b> <?php echo $urgency; ?>
-            <br>
-            <b>Naturaleza interior (vocales):</b> <?php echo $emotiveNature; ?>
-            <br>
-            <b>Constitucion fisica (consonantes):</b> <?php echo $physicConstitution; ?>
-            <br>
-            <b>Talento natural:</b> <?php echo $naturalTalent; ?>
-            <br>
-        </p>
-        <br>
-
-        <h4>52avos (yyyy-m-d):</h4>
-        <p>
-        <?php 
-        echo "<ul>"; 
-        for($i = 0; $i<count($fifty_init); $i++){
-            echo "<li>"; 
-            echo $fifty_init[$i] . "   ->   ";
-            echo $fifty_end[$i];
-            echo "</li>"; 
-        }
-        echo "</ul>"; 
-        ?>
-        </p>
-
+        <center>
+            <p>¡AHORA TUS RESULTADOS!</p>
+            <p><h1><?php echo $name?></h1></p>
+            <p style="font-size: small;">FECHA DE NACIMIENTO: <?php echo $day . " de " . getFullMonth($month) . " de " . $year?> </p>
+        </center>
+        <br><br>
+        <div class="row">
+            <div class="col 4">
+                <center>
+                <br><br><img src="<?php echo getTarot($tonica) ?>" width="250" height="800"><br><br>
+                <a href="<?php echo $tarot_links[$tonica]?>" target="_blank">Explora tu carta egipcia</a>
+                </center>
+            </div>
+            <div class="col 6">
+                <h2>NUMEROLOGÍA</h2><br>
+                <p class="ltl">
+                    LA TÓNICA FUNDAMENTAL
+                    Representa el perfil psicológico del individuo, sus características predominantes, eso que lo define. Viene siendo en la Numerología el equivalente de lo que es el Signo Zodiacal en la astrología
+                </p>
+                <p class="important ltl">TU TÓNICA FUNDAMENTAL ES: <?php echo $tonica . "<br>" . $tonic_results[$tonica]; ?></p><br><br>
+                <p class="ltl">
+                    LA URGENCIA INTERIOR
+                    como su nombre lo indica es un aspecto de sí mismos (o varios) que son urgentes conocer como parte del proceso del autoconomiento. Aspectos que en cada encarnación son preponderantes en el individuo y que resultan de gran utilidad conocerlos, para avanzar en el camino.                </p>
+                <p class="important ltl">TU URGENCIA INTERIOR ES: <?php echo $urgency  . "<br>" . $urgency_results[$urgency]; ?></p><br><br>
+                <p class="ltl">
+                    LA NATURALEZA EMOTIVA
+                    se refiere a como funcionan las emociones en cada uno de nosotros. Cual es nuestra natural inclinación a la hora de expresas nuestros sentimientos. Todo el mundo tiene emociones, pero la forma en que se manifiestan (sienten, interior) y se expresan (exterior) es muy particular. Y este análisis nos ayuda a entender un poco mejor eso, como parte de nuestro autoconocimiento.
+                <p class="important ltl">TU NATURALEZA EMOTIVA ES: <?php echo $emotiveNature . "<br>" . $nature_results[$emotiveNature]; ?></p><br><br>
+                <p class="ltl">
+                    LA CONSTITUCIÓN FÍSICA
+                    esta especialmente enfocado a la Salud y funcionamiento en general del Cuerpo Físico
+                    <p class="important ltl">TU CONSTITUCIÓN FÍSICA ES ES: <?php echo $physicConstitution . "<br>" . $physic_results[$physicConstitution]; ?></p><br><br>
+                <p class="ltl">
+                    EL TALENTO NATURAL
+                    nos habla de un aspecto DESTACADO de nuestra personalidad, una inclinación (positiva o negativa) muy marcada en cada uno, por lo que viene este análisis a ser un complemento adecuado de la TONICA.
+                    <p class="important ltl">TU TALENTO NATURAL ES: <?php echo $naturalTalent . "<br>" . $talent_results[$naturalTalent]; ?></p><br><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col 6">
+                <h2>ASTROLOGÍA</h2><br>
+                <p>Parrafo de respuesta</p><br>
+                <h3>52 AVOS</h3><br>
+                <p>Son siete periodos de 52 días, que se calculan a partir de tu cumpleaños y están relacionadas con nuestros negocios y papeleos.</p>
+                <p>
+                <?php 
+                for($i = 0; $i<count($fifty_init); $i++){
+                    echo "Periodo del " . $fifty_init[$i] . " al " . $fifty_end[$i] . "<br>";
+                }
+                ?>
+                </p>
+            </div>
+            <div class="col 4">
+                <center>
+                <img src="images/zodiaco/aries.jpg" width="350" height="550"><br><br>
+                <a href="<?php echo $tarot_links[$tonica]?>">Explora tu signo</a>
+                </center>
+            </div>
+        </div>
     </div>
 </body>
 </html>
