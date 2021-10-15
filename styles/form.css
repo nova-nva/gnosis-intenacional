@@ -1,0 +1,22 @@
+body{
+    height: 100%;
+    background-image: url("../images/night.jpg");
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+main{
+    color: white;
+}
+
+.form-container{
+    background: #ffffff;
+    top: 15vh;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #000000;
+}
