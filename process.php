@@ -1,5 +1,118 @@
 <?php
-require_once "./results.php";
+require_once "./config.php";
+
+function getTarot($num){
+    return "./images/tarot/tarot0" . $num . ".jpg";
+}
+
+function getZodiac($month, $day){
+    if($month == 1){
+        if($day <= 19){
+            return 'capricornio';
+        }
+        else if($day >= 20){
+            return 'acuario';
+        }
+    }
+    else if($month == 2){
+        if($day <= 19){
+            return 'acuario';
+        }
+        else if($day >= 20){
+            return 'piscis';
+        }
+    }
+    else if($month == 3){
+        if ($day >= 21){
+            return 'aries';
+        }
+        else if($day <= 20){
+            return 'piscis';
+        }
+    }
+    else if($month == 4){
+        if($day <= 19){
+            return 'aries';
+        }
+        else if($day >= 20){
+            return 'tauro';
+        }
+    }
+    else if($month == 5){
+        if($day <= 19){
+            return 'tauro';
+        }
+        else if ($day >= 20){
+            return 'geminis';
+        }
+    }
+    else if($month == 6){
+        if($day <= 20){
+            return 'geminis';
+        }
+        else if($day >= 21){
+            return 'cancer';
+        }
+    }
+    else if($month == 7){
+        if($day <= 22){
+            return 'cancer';
+        }
+        else if($day >= 23){
+            return 'leo';
+        }
+    }
+    else if($month == 8){
+        if($day <= 22) {
+            return 'leo';
+        }
+        else if($day >= 23){
+            return 'virgo';
+        }
+    }
+    else if($month == 9){
+        if($day <= 22){
+            return 'virgo';
+        }
+        else if($day >= 23){
+            return 'libra';
+        }
+    }
+    else if($month == 10){
+        if($day <= 22){
+            return 'libra';
+        }
+        else if($day >= 23){
+            return 'escorpio';
+        }
+    }
+    else if($month == 11){
+        if($day <= 22){
+            return 'escorpio';
+        }
+        else if($day >= 23){
+            return 'sagitario';
+        }
+    }
+    else if($month == 12){
+        if($day <= 19){
+            return 'sagitario';
+        }
+        else if($day >= 20){
+            return 'capricornio';
+        }
+    }
+}
+
+function getZodiacImage($sign){
+    return "./images/zodiaco/" . $sign . ".jpg";
+}
+
+function getFinalDate($date){
+    $fragmented = explode("-", $date);   
+    $newDate = $fragmented[2] . "/" . $fragmented[1] . "/" . $fragmented[0];
+    return $newDate;
+}
 
 function recursive_addition($number){
     $len = strlen($number);
@@ -188,12 +301,12 @@ for($i = 0; $i<7; $i++){
         <div class="row">
             <div class="col 4">
                 <center>
-                <br><br><img src="<?php echo getTarot($tonica) ?>" width="250" height="800"><br><br>
+                <br><br><img src="<?php echo getTarot($tonica) ?>" width="400" height="800"><br><br>
                 <a href="<?php echo $tarot_links[$tonica]?>" target="_blank">Explora tu carta egipcia</a>
                 </center>
             </div>
             <div class="col 6">
-                <h2>NUMEROLOGÍA</h2><br>
+                <br><h2>NUMEROLOGÍA</h2><br>
                 <p class="ltl">
                     LA TÓNICA FUNDAMENTAL
                     Representa el perfil psicológico del individuo, sus características predominantes, eso que lo define. Viene siendo en la Numerología el equivalente de lo que es el Signo Zodiacal en la astrología
@@ -210,7 +323,7 @@ for($i = 0; $i<7; $i++){
                 <p class="ltl">
                     LA CONSTITUCIÓN FÍSICA
                     esta especialmente enfocado a la Salud y funcionamiento en general del Cuerpo Físico
-                    <p class="important ltl">TU CONSTITUCIÓN FÍSICA ES ES: <?php echo $physicConstitution . "<br>" . $physic_results[$physicConstitution]; ?></p><br><br>
+                    <p class="important ltl">TU CONSTITUCIÓN FÍSICA ES: <?php echo $physicConstitution . "<br>" . $physic_results[$physicConstitution]; ?></p><br><br>
                 <p class="ltl">
                     EL TALENTO NATURAL
                     nos habla de un aspecto DESTACADO de nuestra personalidad, una inclinación (positiva o negativa) muy marcada en cada uno, por lo que viene este análisis a ser un complemento adecuado de la TONICA.
@@ -220,21 +333,24 @@ for($i = 0; $i<7; $i++){
         <div class="row">
             <div class="col 6">
                 <h2>ASTROLOGÍA</h2><br>
-                <p>Parrafo de respuesta</p><br>
+                <p class="ltl"><?php echo $zodiac_results[getZodiac($month, $day)]; ?></p><br>
                 <h3>52 AVOS</h3><br>
-                <p>Son siete periodos de 52 días, que se calculan a partir de tu cumpleaños y están relacionadas con nuestros negocios y papeleos.</p>
+                <p class="ltl">Son siete periodos de 52 días, que se calculan a partir de tu cumpleaños y están relacionadas con nuestros negocios y papeleos.</p>
                 <p>
                 <?php 
+                echo "<p class='ltl'>";
                 for($i = 0; $i<count($fifty_init); $i++){
-                    echo "Periodo del " . $fifty_init[$i] . " al " . $fifty_end[$i] . "<br>";
+                    echo "<span class='important'>Periodo del " . getFinalDate($fifty_init[$i]) . " al " . getFinalDate($fifty_end[$i]) . "</span>"; 
+                    echo " - " . $fiftys[$i+1] . "<br><br>";
                 }
+                echo "</p>";
                 ?>
                 </p>
             </div>
             <div class="col 4">
                 <center>
-                <img src="images/zodiaco/aries.jpg" width="350" height="550"><br><br>
-                <a href="<?php echo $tarot_links[$tonica]?>">Explora tu signo</a>
+                <br><br><br><img src="<?php echo getZodiacImage(getZodiac($month, $day)) ?>" width="400" height="700"><br><br>
+                <a href="<?php echo $zodiac_links[getZodiac($month, $day)]?>" target="_blank">Explora tu signo</a>
                 </center>
             </div>
         </div>
