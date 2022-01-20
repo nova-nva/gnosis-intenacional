@@ -175,7 +175,12 @@ function getFullMonth($month){
     }
 }
 
-$name = $_POST['name'];
+// Proceso de tildes
+$accents = array("á", "é", "í", "ó", "ú");
+$no_accents = array("a", "e", "i", "o", "u");
+
+$pre_name = $_POST['name'];
+$name = str_replace($accents, $no_accents, $pre_name);
 $day = $_POST['day'];
 $month = $_POST['month'];
 $year = $_POST['year'];
@@ -203,7 +208,8 @@ $urgency = recursive_addition($preSum);
 $vowels = array("a" => 1, "e" => 6, "i" => 10, "o" => 18, "u" => 24);
 $v_counter = 0;
 for($i = 0; $i<count($names); $i++){
-    $word = strtolower($names[$i]);
+    $word= strtolower($names[$i]);
+    $word = str_replace($accents, $no_accents, $word);
     for($j = 0; $j<strlen($word); $j++){
         if($word[$j] == "a" || $word[$j] == "e" || $word[$j] == "i" || $word[$j] == "o" || $word[$j] == "u"){
             $v_counter += $vowels[$word[$j]];
@@ -218,6 +224,7 @@ $rpl = array("a", "e", "i", "o", "u");
 $c_counter = 0;
 for($i = 0; $i<count($names); $i++){
     $word = strtolower($names[$i]);
+    $word = str_replace($accents, $no_accents, $word);
     $word = str_replace($rpl, "", $word);
     $word = str_replace("ñ", "|", $word);
     for($j = 0; $j<strlen($word); $j++){
@@ -259,7 +266,7 @@ for($i = 0; $i<7; $i++){
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Resultados</title>
@@ -294,14 +301,14 @@ for($i = 0; $i<7; $i++){
         <br>
         <center>
             <p>¡AHORA TUS RESULTADOS!</p>
-            <p><h1><?php echo $name?></h1></p>
+            <p><h1><?php echo $pre_name?></h1></p>
             <p style="font-size: small;">FECHA DE NACIMIENTO: <?php echo $day . " de " . getFullMonth($month) . " de " . $year?> </p>
         </center>
         <br><br>
         <div class="row">
             <div class="col 4">
                 <center>
-                <br><br><img src="<?php echo getTarot($tonica) ?>" width="400" height="800"><br><br>
+                <br><br><img src="<?php echo getTarot($urgency) ?>" width="400" height="800"><br><br>
                 <a href="<?php echo $tarot_links[$tonica]?>" target="_blank">Explora tu carta egipcia</a>
                 </center>
             </div>
@@ -311,11 +318,11 @@ for($i = 0; $i<7; $i++){
                     LA TÓNICA FUNDAMENTAL
                     Representa el perfil psicológico del individuo, sus características predominantes, eso que lo define. Viene siendo en la Numerología el equivalente de lo que es el Signo Zodiacal en la astrología
                 </p>
-                <p class="important ltl">TU TÓNICA FUNDAMENTAL ES: <?php echo $tonica . "<br>" . $tonic_results[$tonica]; ?></p><br><br>
+                <p class="important ltl">TU TÓNICA FUNDAMENTAL ES: <?php echo $urgency . "<br>" . $tonic_results[$urgency]; ?></p><br><br>
                 <p class="ltl">
                     LA URGENCIA INTERIOR
                     como su nombre lo indica es un aspecto de sí mismos (o varios) que son urgentes conocer como parte del proceso del autoconomiento. Aspectos que en cada encarnación son preponderantes en el individuo y que resultan de gran utilidad conocerlos, para avanzar en el camino.                </p>
-                <p class="important ltl">TU URGENCIA INTERIOR ES: <?php echo $urgency  . "<br>" . $urgency_results[$urgency]; ?></p><br><br>
+                <p class="important ltl">TU URGENCIA INTERIOR ES: <?php echo $tonica  . "<br>" . $urgency_results[$tonica]; ?></p><br><br>
                 <p class="ltl">
                     LA NATURALEZA EMOTIVA
                     se refiere a como funcionan las emociones en cada uno de nosotros. Cual es nuestra natural inclinación a la hora de expresas nuestros sentimientos. Todo el mundo tiene emociones, pero la forma en que se manifiestan (sienten, interior) y se expresan (exterior) es muy particular. Y este análisis nos ayuda a entender un poco mejor eso, como parte de nuestro autoconocimiento.
@@ -332,7 +339,9 @@ for($i = 0; $i<7; $i++){
         </div>
         <div class="row">
             <div class="col 6">
-                <h2>ASTROLOGÍA</h2><br>
+                <h2>ASTROLOGÍA</h2>
+                <p>TU SIGNO: <?php echo strtoupper(getZodiac($month, $day)); ?></p><br>
+
                 <p class="ltl"><?php echo $zodiac_results[getZodiac($month, $day)]; ?></p><br>
                 <h3>52 AVOS</h3><br>
                 <p class="ltl">Son siete periodos de 52 días, que se calculan a partir de tu cumpleaños y están relacionadas con nuestros negocios y papeleos.</p>

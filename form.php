@@ -58,7 +58,7 @@
                         <option value="">Elija un año...</option>
                         <?php
                         $year = (int) date("Y");
-                        for ($i= $year - 110; $i < $year; $i++) { 
+                        for ($i= $year; $i >= $year - 110; $i--) { 
                             echo '<option value="' . $i . '"> ' . $i . '</option>';
                         }
                         ?>                
