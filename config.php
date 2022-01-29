@@ -110,4 +110,16 @@ $fiftys = array(
     6 => "junto al primer 52 avo este es un periodo de exito, muy bueno para iniciar un negocio, un buen amor, compras acertadas, adelante en todo lo que emprendas.",
     7 => "muy malo para hacer cualquier negocio. Este ultimo 52 avo termina con tu cumpleaños, pero ten en cuenta que el dia de tu cumpleaños es especialmente peligroso, pues aun no haz nacido astrologicamente... cuidate bien ese dia hasta que llegue tu hora de nacimiento."
 );
+
+$acontecimiento = array(
+    1 => "El mago del tarot.",
+    2 => "La sacerdotisa.",
+    3 => "La emperatriz.",
+    4 => "El emperador.",
+    5 => "El jerarca.",
+    6 => "El enamorado.",
+    7 => "El triunfo.",
+    8 => "La justicia.",
+    9 => "El eremita."
+);
 ?>

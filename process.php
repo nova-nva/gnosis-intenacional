@@ -263,6 +263,14 @@ for($i = 0; $i<7; $i++){
     array_push($fifty_end, $end_date);
     $init_date = $end_date;
 }
+
+// Acontecimiento del dia
+$current_date = date("d-m-Y");
+$dateArray = explode("-", $current_date);
+$current_day = intval($dateArray[0]); 
+$current_month = intval($dateArray[1]); 
+$current_year = intval($dateArray[2]);
+$day_event = recursive_addition(recursive_addition($current_day + $current_month + $current_year) + $urgency);
 ?>
 
 <!DOCTYPE html>
@@ -284,6 +292,9 @@ for($i = 0; $i<7; $i++){
             font-size: small;
             text-align: justify;
         }
+        .aswr{
+            color: mediumseagreen;
+        }
     </style>    
 </head>
 <body>
@@ -303,6 +314,7 @@ for($i = 0; $i<7; $i++){
             <p>¡AHORA TUS RESULTADOS!</p>
             <p><h1><?php echo $pre_name?></h1></p>
             <p style="font-size: small;">FECHA DE NACIMIENTO: <?php echo $day . " de " . getFullMonth($month) . " de " . $year?> </p>
+            <br><br><p class="aswr">TU NÚMERO PARA LA FECHA DE HOY ES: &nbsp;<span style="font-style: italic; font-weight: bold; font-size: x-large;"><?php echo $day_event . " - "; ?><?php echo $acontecimiento[$day_event]; ?></span></p>
         </center>
         <br><br>
         <div class="row">
@@ -318,23 +330,23 @@ for($i = 0; $i<7; $i++){
                     LA TÓNICA FUNDAMENTAL
                     Representa el perfil psicológico del individuo, sus características predominantes, eso que lo define. Viene siendo en la Numerología el equivalente de lo que es el Signo Zodiacal en la astrología
                 </p>
-                <p class="important ltl">TU TÓNICA FUNDAMENTAL ES: <?php echo $urgency . "<br>" . $tonic_results[$urgency]; ?></p><br><br>
+                <p class="aswr ltl">TU TÓNICA FUNDAMENTAL ES: <?php echo $urgency . "<br>" . $tonic_results[$urgency]; ?></p><br><br>
                 <p class="ltl">
                     LA URGENCIA INTERIOR
                     como su nombre lo indica es un aspecto de sí mismos (o varios) que son urgentes conocer como parte del proceso del autoconomiento. Aspectos que en cada encarnación son preponderantes en el individuo y que resultan de gran utilidad conocerlos, para avanzar en el camino.                </p>
-                <p class="important ltl">TU URGENCIA INTERIOR ES: <?php echo $tonica  . "<br>" . $urgency_results[$tonica]; ?></p><br><br>
+                <p class="aswr ltl">TU URGENCIA INTERIOR ES: <?php echo $tonica  . "<br>" . $urgency_results[$tonica]; ?></p><br><br>
                 <p class="ltl">
                     LA NATURALEZA EMOTIVA
                     se refiere a como funcionan las emociones en cada uno de nosotros. Cual es nuestra natural inclinación a la hora de expresas nuestros sentimientos. Todo el mundo tiene emociones, pero la forma en que se manifiestan (sienten, interior) y se expresan (exterior) es muy particular. Y este análisis nos ayuda a entender un poco mejor eso, como parte de nuestro autoconocimiento.
-                <p class="important ltl">TU NATURALEZA EMOTIVA ES: <?php echo $emotiveNature . "<br>" . $nature_results[$emotiveNature]; ?></p><br><br>
+                <p class="aswr ltl">TU NATURALEZA EMOTIVA ES: <?php echo $emotiveNature . "<br>" . $nature_results[$emotiveNature]; ?></p><br><br>
                 <p class="ltl">
                     LA CONSTITUCIÓN FÍSICA
                     esta especialmente enfocado a la Salud y funcionamiento en general del Cuerpo Físico
-                    <p class="important ltl">TU CONSTITUCIÓN FÍSICA ES: <?php echo $physicConstitution . "<br>" . $physic_results[$physicConstitution]; ?></p><br><br>
+                    <p class="aswr ltl">TU CONSTITUCIÓN FÍSICA ES: <?php echo $physicConstitution . "<br>" . $physic_results[$physicConstitution]; ?></p><br><br>
                 <p class="ltl">
                     EL TALENTO NATURAL
                     nos habla de un aspecto DESTACADO de nuestra personalidad, una inclinación (positiva o negativa) muy marcada en cada uno, por lo que viene este análisis a ser un complemento adecuado de la TONICA.
-                    <p class="important ltl">TU TALENTO NATURAL ES: <?php echo $naturalTalent . "<br>" . $talent_results[$naturalTalent]; ?></p><br><br>
+                    <p class="aswr ltl">TU TALENTO NATURAL ES: <?php echo $naturalTalent . "<br>" . $talent_results[$naturalTalent]; ?></p><br><br>
             </div>
         </div>
         <div class="row">
@@ -349,7 +361,7 @@ for($i = 0; $i<7; $i++){
                 <?php 
                 echo "<p class='ltl'>";
                 for($i = 0; $i<count($fifty_init); $i++){
-                    echo "<span class='important'>Periodo del " . getFinalDate($fifty_init[$i]) . " al " . getFinalDate($fifty_end[$i]) . "</span>"; 
+                    echo "<span class='aswr'>Periodo del " . getFinalDate($fifty_init[$i]) . " al " . getFinalDate($fifty_end[$i]) . "</span>"; 
                     echo " - " . $fiftys[$i+1] . "<br><br>";
                 }
                 echo "</p>";
